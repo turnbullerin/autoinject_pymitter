@@ -1,10 +1,10 @@
 """ Simple module that allows using pymitter as an auto-injected dependency """
-from autoinject import injector as _injector
 from pymitter import EventEmitter
 
 
-@_injector.register(EventEmitter)
-def _create_event_emitter():
-    return EventEmitter(wildcard=True)
+def _register_event_emitter(injector):
+    """ Entry point for autoinject.registrars that registers the EventEmitter class """
+    injector.register_constructor(EventEmitter, EventEmitter, wildcard=True)
+
 
 __version__ = "1.0.0"
